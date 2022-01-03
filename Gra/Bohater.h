@@ -33,6 +33,7 @@ public:
 	int firingspeed = 10;
 	int shotspeed = 3;
 	int damage = 1;
+	int hp = 5;
 private:
 	RectangleShape shape;
 	const float postac_rozm = 35.0;
@@ -57,6 +58,6 @@ private:
 	// - ruch sprite'a
 	int sprW = 0, sprA = 0, sprS = 0, sprD = 0;
 	int sprDiagWA = 0, sprDiagWD = 0, sprDiagSA = 0, sprDiagSD = 0;
-	int timeSprite=0, timeDiagSprite = 0;
+	int timeSprite = 0, timeDiagSprite = 0;
 };
 

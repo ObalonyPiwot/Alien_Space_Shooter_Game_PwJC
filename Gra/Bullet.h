@@ -6,6 +6,7 @@ using namespace sf;
 class Bullet
 {
 public:
+    int mybullet = 0;
     Bullet(int size, char dir)
     {
         bullet.setSize(Vector2f(size,size));
