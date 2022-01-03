@@ -130,12 +130,12 @@ void runGame()
     for (int i = 0; i < wallVec.size(); i++)
         wallVec[i].setTexture();
 
-    int curLevel = 0;
+    int curLevel = 1;
     bool isFiring = false;
     char direction[1];
     int shot = 0;
     int pauza = 0, pauseTime = 10;
-    bohater.predkosci(10);
+    bohater.predkosci(15);
     //bohater.postac_predkosc = 10.0;
 
 
@@ -165,15 +165,21 @@ void runGame()
         }
         if (!pauza)
         {
-            if (enemyVec.size() == 0)
+            if (enemyVec.size() == 0 || !bohater.hp )
             {
                 window.draw(exit);
                 if (bohater.getPosition().x >= exit.getPosition().x && bohater.getPosition().x <= exit.getPosition().x + exit.getSize().x &&
-                    bohater.getPosition().y >= exit.getPosition().y && bohater.getPosition().x <= exit.getPosition().y + exit.getSize().y /*&& bohater.weapon != 0*/)
+                    bohater.getPosition().y >= exit.getPosition().y && bohater.getPosition().x <= exit.getPosition().y + exit.getSize().y || !bohater.hp/*&& bohater.weapon != 0*/)
                 {
                     while (wallVec.size() > 0)
-                        wallVec.erase(wallVec.begin());
-                    curLevel++;
+                        wallVec.erase(wallVec.begin()); 
+                    while (enemyVec.size() > 0)
+                        enemyVec.erase(enemyVec.begin());
+                    while (bulletVec.size() > 0)
+                        bulletVec.erase(bulletVec.begin());
+                    if(bohater.hp)
+                        curLevel++;
+                    bohater.hp = 5;
                     if (curLevel == 1)
                     {
                         enemyVec = level1_enemy(enemyVec);
@@ -204,6 +210,8 @@ void runGame()
                         wallVec = level5_wall(wallVec);
                         bohater.setPosition(15, 300);
                     }
+                    for (int i = 0; i < wallVec.size(); i++)
+                        wallVec[i].setTexture();
                 }
             }
 
@@ -242,13 +250,23 @@ void runGame()
                         bulletVec.erase(bulletVec.begin() + i);
                         x = 100;
                     }
+            for (int i = 0; i < bulletVec.size(); i++)
+                if (Overdrawing(bulletVec.at(i), bohater) && bulletVec.at(i).mybullet == 0)
+                {
+                    bulletVec.erase(bulletVec.begin() + i);
+                    bohater.hp--;
+                }
 
             window.draw(bohater);
             for (int i = 0; i < (int)enemyVec.size(); i++)
+            {
+                if (Overdrawing(bohater, enemyVec.at(i)))
+                    bohater.hp--;
                 if (enemyVec[i].HP <= 0)
                 {
                     enemyVec.erase(enemyVec.begin() + i);
                 }
+            }
 
             for (int i = 0; i < enemyVec.size(); i++)
             {
@@ -263,10 +281,12 @@ void runGame()
             if (isFiring == true && shot == 0) {
                 Bullet newBullet(2, direction[0]);
                 newBullet.setPos(Vector2f(bohater.getPosition().x, bohater.getPosition().y));
+                newBullet.mybullet = 1;
                 bulletVec.push_back(newBullet);
                 isFiring = false;
                 shot = bohater.firingspeed;//firing speeed
-                //bohater.play_Shoot();
+                bohater.play_Shoot();
+
             }
             if (shot > 0)
                 shot--;

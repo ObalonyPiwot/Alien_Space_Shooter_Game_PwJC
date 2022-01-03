@@ -15,7 +15,7 @@ void Bohater::updateSprite(int spriteType)
 		sprW = sprS = sprD = 0;
 		if (!timeSprite)
 		{
-			cout << "A "<<endl;
+			cout << "A " << endl;
 			timeSprite++;
 			switch (sprA)
 			{
@@ -48,7 +48,7 @@ void Bohater::updateSprite(int spriteType)
 		break;
 	case 2: // -- D
 		if (Keyboard::isKeyPressed(Keyboard::W)) { Bohater::updateSpriteDiagonally(2); return; }
-		else if(Keyboard::isKeyPressed(Keyboard::S)) { Bohater::updateSpriteDiagonally(4); return; }
+		else if (Keyboard::isKeyPressed(Keyboard::S)) { Bohater::updateSpriteDiagonally(4); return; }
 		sprW = sprS = sprA = 0;
 		if (!timeSprite)
 		{
@@ -83,7 +83,7 @@ void Bohater::updateSprite(int spriteType)
 		break;
 	case 3: // - W
 		if (Keyboard::isKeyPressed(Keyboard::A)) { Bohater::updateSpriteDiagonally(1); return; }
-		else if(Keyboard::isKeyPressed(Keyboard::D)) { Bohater::updateSpriteDiagonally(2); return; }
+		else if (Keyboard::isKeyPressed(Keyboard::D)) { Bohater::updateSpriteDiagonally(2); return; }
 		sprD = sprS = sprA = 0;
 		if (!timeSprite)
 		{
