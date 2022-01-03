@@ -220,9 +220,9 @@ void runGame()
                 || Keyboard::isKeyPressed(Keyboard::S) || Keyboard::isKeyPressed(Keyboard::D))) {
                 bohater.updateSprite(0);
             }
-            if (Keyboard::isKeyPressed(Keyboard::W)) { bohater.ruch(1); } //bohater.updateSprite(1);  }
+            if (Keyboard::isKeyPressed(Keyboard::W)) { bohater.ruch(1);  bohater.updateSprite(3); }
             if (Keyboard::isKeyPressed(Keyboard::A)) { bohater.ruch(2);  bohater.updateSprite(1); }
-            if (Keyboard::isKeyPressed(Keyboard::S)) { bohater.ruch(3); }// bohater.updateSprite(3); }
+            if (Keyboard::isKeyPressed(Keyboard::S)) { bohater.ruch(3);  bohater.updateSprite(4); }
             if (Keyboard::isKeyPressed(Keyboard::D)) { bohater.ruch(4);  bohater.updateSprite(2); }
 
             for (int i = 0; i < wallVec.size(); i++)
@@ -266,7 +266,7 @@ void runGame()
                 bulletVec.push_back(newBullet);
                 isFiring = false;
                 shot = bohater.firingspeed;//firing speeed
-                bohater.play_Shoot();
+                //bohater.play_Shoot();
             }
             if (shot > 0)
                 shot--;

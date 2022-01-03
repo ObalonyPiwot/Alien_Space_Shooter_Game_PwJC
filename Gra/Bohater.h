@@ -23,6 +23,7 @@ public:
 	void setPosition(float p_X, float p_Y);
 	// - sprite'y 
 	void updateSprite(int spriteType);
+	void updateSpriteDiagonally(int spriteType);
 	void setSprite(const string& tileset, Vector2i startSprite, Vector2i endSprite);
 
 	// - shoot sound play
@@ -55,6 +56,7 @@ private:
 
 	// - ruch sprite'a
 	int sprW = 0, sprA = 0, sprS = 0, sprD = 0;
-	int timeSprite=0;
+	int sprDiagWA = 0, sprDiagWD = 0, sprDiagSA = 0, sprDiagSD = 0;
+	int timeSprite=0, timeDiagSprite = 0;
 };
 
