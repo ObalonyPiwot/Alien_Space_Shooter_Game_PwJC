@@ -206,7 +206,7 @@ void runGame()
                     }
                     if (curLevel == 5)
                     {
-                        //enemyVec = level5_enemy(enemyVec);
+                        enemyVec = level5_enemy(enemyVec);
                         wallVec = level5_wall(wallVec);
                         bohater.setPosition(15, 300);
                     }
@@ -234,10 +234,15 @@ void runGame()
             if (Keyboard::isKeyPressed(Keyboard::D)) { bohater.ruch(4);  bohater.updateSprite(2); }
 
             for (int i = 0; i < wallVec.size(); i++)
-                Collision(wallVec[i], bohater);
+            { 
+                if (wallVec[i].lava == 0)
+                    Collision(wallVec[i], bohater);
+                if (Overdrawing(bohater, wallVec[i]) && wallVec[i].lava == 1)
+                    bohater.hp = 0;
+            }     
             for (int i = 0; i < bulletVec.size(); i++)
                 for (int j = 0; j < wallVec.size(); j++)
-                    if (Overdrawing(bulletVec.at(i), wallVec[j]))
+                    if (Overdrawing(bulletVec.at(i), wallVec[j]) && wallVec[j].lava == 0)
                     {
                         bulletVec.erase(bulletVec.begin() + i);
                         j = 100;
