@@ -45,36 +45,36 @@ void death()
 
 vector<Bullet> enemyShot(Bohater bohater, Enemy enemy, vector<Bullet> bulletVec)
 {
-    if (enemy.getPosition().y >= bohater.getPosition().y - 10 && enemy.getPosition().y <= bohater.getPosition().y + 10)
+    if (enemy.getPosition().y >= bohater.getPosition().y - 15 && enemy.getPosition().y <= bohater.getPosition().y + 15)
     {
         if (enemy.getPosition().x < bohater.getPosition().x)
         {
             Bullet newBullet(2, 'D');
-            newBullet.setPos(Vector2f(enemy.getPosition().x + 5, enemy.getPosition().y));
+            newBullet.setPos(Vector2f(enemy.getPosition().x + 15, enemy.getPosition().y));
             bulletVec.push_back(newBullet);
             return bulletVec;
         }
         if (enemy.getPosition().x > bohater.getPosition().x)
         {
             Bullet newBullet(2, 'A');
-            newBullet.setPos(Vector2f(enemy.getPosition().x - 5, enemy.getPosition().y));
+            newBullet.setPos(Vector2f(enemy.getPosition().x - 15, enemy.getPosition().y));
             bulletVec.push_back(newBullet);
             return bulletVec;
         }
     }
-    if ((enemy.getPosition().x >= bohater.getPosition().x - 10 && enemy.getPosition().x <= bohater.getPosition().x + 10))
+    if ((enemy.getPosition().x >= bohater.getPosition().x - 15 && enemy.getPosition().x <= bohater.getPosition().x + 15))
     {
         if (enemy.getPosition().y < bohater.getPosition().y)
         {
             Bullet newBullet(2, 'S');
-            newBullet.setPos(Vector2f(enemy.getPosition().x, enemy.getPosition().y + 5));
+            newBullet.setPos(Vector2f(enemy.getPosition().x, enemy.getPosition().y + 15));
             bulletVec.push_back(newBullet);
             return bulletVec;
         }
         if (enemy.getPosition().y > bohater.getPosition().y)
         {
             Bullet newBullet(2, 'W');
-            newBullet.setPos(Vector2f(enemy.getPosition().x, enemy.getPosition().y - 5));
+            newBullet.setPos(Vector2f(enemy.getPosition().x, enemy.getPosition().y - 15));
             bulletVec.push_back(newBullet);
             return bulletVec;
         }
@@ -136,7 +136,8 @@ void runGame()
     int shot = 0;
     int pauza = 0, pauseTime = 10;
     bohater.predkosci(15);
-    //bohater.postac_predkosc = 10.0;
+    // - czas wroga
+    int eTurn = 0;
 
 
     // - petla gry 
@@ -165,19 +166,19 @@ void runGame()
         }
         if (!pauza)
         {
-            if (enemyVec.size() == 0 || !bohater.hp )
+            if (enemyVec.size() == 0 || !bohater.hp)
             {
                 window.draw(exit);
                 if (bohater.getPosition().x >= exit.getPosition().x && bohater.getPosition().x <= exit.getPosition().x + exit.getSize().x &&
                     bohater.getPosition().y >= exit.getPosition().y && bohater.getPosition().x <= exit.getPosition().y + exit.getSize().y || !bohater.hp/*&& bohater.weapon != 0*/)
                 {
                     while (wallVec.size() > 0)
-                        wallVec.erase(wallVec.begin()); 
+                        wallVec.erase(wallVec.begin());
                     while (enemyVec.size() > 0)
                         enemyVec.erase(enemyVec.begin());
                     while (bulletVec.size() > 0)
                         bulletVec.erase(bulletVec.begin());
-                    if(bohater.hp)
+                    if (bohater.hp)
                         curLevel++;
                     bohater.hp = 5;
                     if (curLevel == 1)
@@ -234,12 +235,12 @@ void runGame()
             if (Keyboard::isKeyPressed(Keyboard::D)) { bohater.ruch(4);  bohater.updateSprite(2); }
 
             for (int i = 0; i < wallVec.size(); i++)
-            { 
+            {
                 if (wallVec[i].lava == 0)
                     Collision(wallVec[i], bohater);
                 if (Overdrawing(bohater, wallVec[i]) && wallVec[i].lava == 1)
                     bohater.hp = 0;
-            }     
+            }
             for (int i = 0; i < bulletVec.size(); i++)
                 for (int j = 0; j < wallVec.size(); j++)
                     if (Overdrawing(bulletVec.at(i), wallVec[j]) && wallVec[j].lava == 0)
@@ -272,16 +273,20 @@ void runGame()
                     enemyVec.erase(enemyVec.begin() + i);
                 }
             }
-
-            for (int i = 0; i < enemyVec.size(); i++)
+            if (eTurn)
             {
-                enemyVec[i].ruch(bohater.getPosition().x, bohater.getPosition().y);
-                for (int j = 0; j < wallVec.size(); j++)
-                    if (enemyVec[i].type != 3 && wallVec[j].lava == 0)
-                        Collision(wallVec[j], enemyVec[i]);
-                if (enemyVec[i].type == 2 && enemyVec[i].canShot())
-                    bulletVec = enemyShot(bohater, enemyVec[i], bulletVec);
+                for (int i = 0; i < enemyVec.size(); i++)
+                {
+                    enemyVec[i].ruch(bohater.getPosition().x, bohater.getPosition().y);
+                    for (int j = 0; j < wallVec.size(); j++)
+                        if (enemyVec[i].type != 3 && wallVec[j].lava == 0)
+                            Collision(wallVec[j], enemyVec[i]);
+                    if (enemyVec[i].type == 2 && enemyVec[i].canShot())
+                        bulletVec = enemyShot(bohater, enemyVec[i], bulletVec);
+                }
+                eTurn = 0;
             }
+            eTurn++;
 
             if (isFiring == true && shot == 0) {
                 Bullet newBullet(2, direction[0]);

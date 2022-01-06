@@ -36,7 +36,7 @@ public:
 	int hp = 5;
 private:
 	RectangleShape shape;
-	const float postac_rozm = 35.0;
+	const float postac_rozm = 30.0;
 
 
 	//ruch bohatera

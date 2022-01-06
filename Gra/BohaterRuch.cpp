@@ -15,7 +15,6 @@ void Bohater::updateSprite(int spriteType)
 		sprW = sprS = sprD = 0;
 		if (!timeSprite)
 		{
-			cout << "A " << endl;
 			timeSprite++;
 			switch (sprA)
 			{
@@ -48,11 +47,10 @@ void Bohater::updateSprite(int spriteType)
 		break;
 	case 2: // -- D
 		if (Keyboard::isKeyPressed(Keyboard::W)) { Bohater::updateSpriteDiagonally(2); return; }
-		else if (Keyboard::isKeyPressed(Keyboard::S)) { Bohater::updateSpriteDiagonally(4); return; }
+		else if(Keyboard::isKeyPressed(Keyboard::S)) { Bohater::updateSpriteDiagonally(4); return; }
 		sprW = sprS = sprA = 0;
 		if (!timeSprite)
 		{
-			cout << "D " << endl;
 			timeSprite++;
 			switch (sprD)
 			{
@@ -83,11 +81,10 @@ void Bohater::updateSprite(int spriteType)
 		break;
 	case 3: // - W
 		if (Keyboard::isKeyPressed(Keyboard::A)) { Bohater::updateSpriteDiagonally(1); return; }
-		else if (Keyboard::isKeyPressed(Keyboard::D)) { Bohater::updateSpriteDiagonally(2); return; }
+		else if(Keyboard::isKeyPressed(Keyboard::D)) { Bohater::updateSpriteDiagonally(2); return; }
 		sprD = sprS = sprA = 0;
 		if (!timeSprite)
 		{
-			cout << "W " << endl;
 			timeSprite++;
 			switch (sprW)
 			{
@@ -122,7 +119,6 @@ void Bohater::updateSprite(int spriteType)
 		sprD = sprW = sprA = 0;
 		if (!timeSprite)
 		{
-			cout << "S " << endl;
 			timeSprite++;
 			switch (sprS)
 			{
@@ -168,7 +164,6 @@ void Bohater::updateSpriteDiagonally(int spriteType)
 		sprDiagWD = sprDiagSA = sprDiagSD;
 		if (!timeDiagSprite)
 		{
-			cout << "AW " << endl;
 			timeDiagSprite++;
 			switch (sprDiagWA)
 			{
@@ -203,7 +198,6 @@ void Bohater::updateSpriteDiagonally(int spriteType)
 		sprDiagWA = sprDiagSA = sprDiagSD;
 		if (!timeDiagSprite)
 		{
-			cout << "DW" << endl;
 			timeDiagSprite++;
 			switch (sprDiagWD)
 			{
@@ -236,7 +230,6 @@ void Bohater::updateSpriteDiagonally(int spriteType)
 		sprDiagWA = sprDiagWD = sprDiagSD;
 		if (!timeDiagSprite)
 		{
-			cout << "AS " << endl;
 			timeDiagSprite++;
 			switch (sprDiagSA)
 			{
@@ -269,7 +262,6 @@ void Bohater::updateSpriteDiagonally(int spriteType)
 		sprDiagWA = sprDiagWD = sprDiagSA;
 		if (!timeDiagSprite)
 		{
-			cout << "DS " << endl;
 			timeDiagSprite++;
 			switch (sprDiagSD)
 			{
