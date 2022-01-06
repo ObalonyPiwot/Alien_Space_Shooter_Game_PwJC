@@ -9,3 +9,8 @@
   - obrazenia od pociskow wroga
   - instant kill przez kolizje z wrogiem i lava
   - UWAGA!!! JEST TRUDNO!!!
+ 
+ • V0.7.5 (run_game.cpp, Enemy.h, Enemy.cpp, EnemyRuch.cpp, folder DATA)
+  - sprite'y przeciwnikow
+  - ruch sprite'ów 
+  - trzeba zrobic ruch impowi zeby w czasie jednej petli mogl isc tylko w jednym kierunku
