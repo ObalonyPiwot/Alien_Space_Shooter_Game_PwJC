@@ -8,7 +8,7 @@ void Enemy::updateSprite(int spriteType)
 	case 0:
 		sprW = sprA = sprS = sprD = timeSprite = 0;
 		if (type == 1) setSprite( Vector2i(0, 0), Vector2i(43, 54), 0);
-		else if (type == 2) setSprite( Vector2i(0, 0), Vector2i(41, 57), 0);
+		else if (type == 2) setSprite( Vector2i(0, 0), Vector2i(63, 66), 0);
 		else if (type == 3) setSprite(Vector2i(0, 0), Vector2i(44, 47), 0);
 		break;
 	case 1: // -- A
@@ -20,26 +20,26 @@ void Enemy::updateSprite(int spriteType)
 			{
 			case 0:
 				if(type == 1)setSprite(Vector2i(0, 0), Vector2i(60, 53), 1);
-				else if (type == 2) setSprite(Vector2i(0, 0), Vector2i(36, 49), 1);
+				else if (type == 2) setSprite(Vector2i(0, 0), Vector2i(63, 66), 0);
 				else if( type == 3) setSprite(Vector2i(0, 0), Vector2i(68, 33), 1);
 				
 				sprA++;
 				break;
 			case 1:
 				if (type == 1) setSprite( Vector2i(61, 0), Vector2i(58, 56), 1);
-				else if (type == 2) setSprite(Vector2i(36, 0), Vector2i(38, 51), 1);
+				else if (type == 2) setSprite(Vector2i(0, 0), Vector2i(63, 66), 0);
 				else if (type == 3) setSprite(Vector2i(69, 0), Vector2i(63, 33), 1);
 				sprA++;
 				break;
 			case 2:
 				if (type == 1)setSprite( Vector2i(119, 0), Vector2i(60, 53), 1);
-				else if (type == 2) setSprite(Vector2i(74, 0), Vector2i(31, 52), 1);
+				else if (type == 2) setSprite(Vector2i(0, 0), Vector2i(63, 66), 0);
 				else if (type == 3) setSprite(Vector2i(0, 0), Vector2i(68, 33), 1);
 				sprA++;
 				break;
 			case 3:
 				if (type == 1)setSprite( Vector2i(179, 0), Vector2i(59, 56), 1);
-				else if (type == 2) setSprite(Vector2i(105, 0), Vector2i(49, 47), 1);
+				else if (type == 2) setSprite(Vector2i(0, 0), Vector2i(63, 66), 0);
 				else if (type == 3) setSprite(Vector2i(69, 0), Vector2i(63, 33), 1);
 				sprA = 0;
 				break;
@@ -63,25 +63,25 @@ void Enemy::updateSprite(int spriteType)
 			{
 			case 0:
 				if (type == 1)setSprite( Vector2i(0, 0), Vector2i(60, 52), 2);
-				else if (type == 2) setSprite(Vector2i(0, 0), Vector2i(36, 49), 2);
+				else if (type == 2) setSprite(Vector2i(0, 0), Vector2i(63, 66), 0);
 				else if (type == 3) setSprite(Vector2i(0, 0), Vector2i(67, 33), 2);
 				sprD++;
 				break;
 			case 1:
 				if (type == 1)setSprite( Vector2i(60, 0), Vector2i(58, 56), 2);
-				else if (type == 2) setSprite(Vector2i(36, 0), Vector2i(38, 51), 2);
+				else if (type == 2) setSprite(Vector2i(0, 0), Vector2i(63, 66), 0);
 				else if (type == 3)	setSprite(Vector2i(67, 0), Vector2i(67, 33), 2);
 				sprD++;
 				break;
 			case 2:
 				if (type == 1)setSprite( Vector2i(118, 0), Vector2i(60, 53), 2);
-				else if (type == 2) setSprite(Vector2i(74, 0), Vector2i(31, 52), 2);
+				else if (type == 2) setSprite(Vector2i(0, 0), Vector2i(63, 66), 0);
 				else if (type == 3)	setSprite(Vector2i(0, 0), Vector2i(67, 33), 2);
 				sprD++;
 				break;
 			case 3:
 				if (type == 1)setSprite( Vector2i(178, 0), Vector2i(59, 56), 2);
-				else if (type == 2) setSprite(Vector2i(105, 0), Vector2i(49, 47), 2);
+				else if (type == 2) setSprite(Vector2i(0, 0), Vector2i(63, 66), 0);
 				else if (type == 3) setSprite(Vector2i(67, 0), Vector2i(67, 33), 2);
 				sprD = 0;
 				break;
@@ -103,25 +103,25 @@ void Enemy::updateSprite(int spriteType)
 			{
 			case 0:
 				if (type == 1)setSprite( Vector2i(0, 0), Vector2i(35, 54), 3);
-				else if (type == 2) setSprite(Vector2i(0, 0), Vector2i(34, 49), 3);
+				else if (type == 2) setSprite(Vector2i(0, 0), Vector2i(63, 66), 0);
 				else if (type == 3) setSprite(Vector2i(0, 0), Vector2i(43, 26), 3);
 				sprW++;
 				break;
 			case 1:
 				if (type == 1)setSprite( Vector2i(35, 0), Vector2i(39, 53), 3);
-				else if (type == 2) setSprite(Vector2i(34, 0), Vector2i(33, 46), 3);
+				else if (type == 2) setSprite(Vector2i(0, 0), Vector2i(63, 66), 0);
 				else if (type == 3) setSprite(Vector2i(43, 0), Vector2i(45, 26), 3);
 				sprW++;
 				break;
 			case 2:
 				if (type == 1)setSprite( Vector2i(74, 0), Vector2i(35, 54), 3);
-				else if (type == 2) setSprite(Vector2i(67, 0), Vector2i(35, 48), 3);
+				else if (type == 2) setSprite(Vector2i(0, 0), Vector2i(63, 66), 0);
 				else if (type == 3) setSprite(Vector2i(0, 0), Vector2i(43, 26), 3);
 				sprW++;
 				break;
 			case 3:
 				if (type == 1)setSprite( Vector2i(109, 0), Vector2i(39, 53), 3);
-				else if (type == 2) setSprite(Vector2i(103, 0), Vector2i(34, 46), 3);
+				else if (type == 2) setSprite(Vector2i(0, 0), Vector2i(63, 66), 0);
 				else if (type == 3) setSprite(Vector2i(43, 0), Vector2i(45, 26), 3);
 				sprW = 0;
 				break;
@@ -143,25 +143,25 @@ void Enemy::updateSprite(int spriteType)
 			{
 			case 0:
 				if (type == 1)setSprite( Vector2i(0, 0), Vector2i(39, 56), 4);
-				else if (type == 2) setSprite(Vector2i(0, 0), Vector2i(41, 57), 4);
+				else if (type == 2) setSprite(Vector2i(0, 0), Vector2i(63, 66), 0);
 				else if (type == 3)	setSprite(Vector2i(43, 0), Vector2i(45, 47), 4);
 				sprS++;
 				break;
 			case 1:
 				if (type == 1)setSprite( Vector2i(39, 0), Vector2i(45, 58), 4);
-				else if (type == 2) setSprite(Vector2i(41, 0), Vector2i(38, 56), 4);
+				else if (type == 2) setSprite(Vector2i(0, 0), Vector2i(63, 66), 0);
 				else if (type == 3)	setSprite(Vector2i(45, 0), Vector2i(44, 46), 4);
 				sprS++;
 				break;
 			case 2:
 				if (type == 1)setSprite( Vector2i(84, 0), Vector2i(39, 55), 4);
-				else if (type == 2) setSprite(Vector2i(79, 0), Vector2i(39, 60), 4);
+				else if (type == 2) setSprite(Vector2i(0, 0), Vector2i(63, 66), 0);
 				else if (type == 3)	setSprite(Vector2i(43, 0), Vector2i(45, 47), 4);
 				sprS++;
 				break;
 			case 3:
 				if (type == 1)setSprite( Vector2i(123, 0), Vector2i(43, 58), 4);
-				else if (type == 2) setSprite(Vector2i(118, 0), Vector2i(37, 57), 4);
+				else if (type == 2) setSprite(Vector2i(0, 0), Vector2i(63, 66), 0);
 				else if (type == 3)	setSprite(Vector2i(45, 0), Vector2i(44, 46), 4);
 				sprS = 0;
 				break;

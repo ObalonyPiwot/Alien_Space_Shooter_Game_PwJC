@@ -34,11 +34,11 @@ void Enemy::ruch(int b_x, int b_y)
 		{
 			if (this->top() > 0) { shape.move(this->ruchW); updateSprite(3); }	
 		}
-		else if (round(this->shape.getPosition().x) > b_x || round(this->shape.getPosition().y) == b_y)
+		else if (round(this->shape.getPosition().x) > b_x)
 		{
 			if (this->left() > 0) { shape.move(this->ruchA); updateSprite(1); }
 		}
-		else if (round(this->shape.getPosition().x) < b_x || round(this->shape.getPosition().y) == b_y)
+		else if (round(this->shape.getPosition().x) < b_x)
 		{
 			if (this->right() < 800) { shape.move(this->ruchD);  updateSprite(2); }
 		}
@@ -80,21 +80,21 @@ void Enemy::ruch(int b_x, int b_y)
 		}
 		else
 		{
-			if (this->shape.getPosition().y >= b_y)
-			{
-				if (this->top() > 0) { shape.move(this->ruchW); updateSprite(3); }
-			}
-			if (this->shape.getPosition().x >= b_x)
+			if (round(this->shape.getPosition().x) > b_x)
 			{
 				if (this->left() > 0) { shape.move(this->ruchA); updateSprite(1); }
 			}
-			if (this->shape.getPosition().y <= b_y)
-			{
-				if (this->bottom() < 600) { shape.move(this->ruchS); updateSprite(4); }
-			}
-			if (this->shape.getPosition().x <= b_x)
+			if (round(this->shape.getPosition().x) < b_x)
 			{
 				if (this->right() < 800) { shape.move(this->ruchD);  updateSprite(2); }
+			}
+			if (round(this->shape.getPosition().y) > b_y)
+			{
+				if (this->top() > 0) { shape.move(this->ruchW); updateSprite(3); }
+			}
+			if (round(this->shape.getPosition().y) < b_y)
+			{
+				if (this->bottom() < 600) { shape.move(this->ruchS); updateSprite(4); }
 			}
 		}
 	}
@@ -168,18 +168,6 @@ void Enemy::setSprite(Vector2i startSprite, Vector2i endSprite, int direction)
 		{
 		case 0:
 			tileset = "DATA/TEXTURE/ENEMIES/TYPE_2/impN.png";
-			break;
-		case 1:
-			tileset = "DATA/TEXTURE/ENEMIES/TYPE_2/impA.png";
-			break;
-		case 2:
-			tileset = "DATA/TEXTURE/ENEMIES/TYPE_2/impD.png";
-			break;
-		case 3:
-			tileset = "DATA/TEXTURE/ENEMIES/TYPE_2/impW.png";
-			break;
-		case 4:
-			tileset = "DATA/TEXTURE/ENEMIES/TYPE_2/impS.png";
 			break;
 		}
 		break;
