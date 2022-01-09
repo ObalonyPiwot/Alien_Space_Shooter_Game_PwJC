@@ -26,6 +26,14 @@ public:
 	// - sprite'y 
 	void updateSprite(int spriteType);
 	void setSprite( Vector2i startSprite, Vector2i endSprite, int direction);
+	// - sprite strzalu
+	bool getShoot();
+	void setShoot(bool shoot);
+	// - sprite smierci
+	bool getAlive();
+	bool getDeath();
+	void setAlive(bool alive);
+	void setDeath(bool death);
 private:
 	RectangleShape shape;
 	float enemy_rozm = 30.0;
@@ -41,8 +49,14 @@ private:
 	// tekstura sprite'a 
 	Texture texture;
 
-	// - ruch sprite'a
-	int sprW = 0, sprA = 0, sprS = 0, sprD = 0;
+	// - czy strzelil 
+	bool isShoot = false;
+	// - czy zyje
+	bool isAlive = false;
+	bool canDeath = false;
+
+	// - ruch sprite'a, strzal, smierc
+	int sprW = 0, sprA = 0, sprS = 0, sprD = 0, sprShoot = 0, sprDeath = 0; ;
 	int sprDiagWA = 0, sprDiagWD = 0, sprDiagSA = 0, sprDiagSD = 0;
 	int timeSprite = 0, timeDiagSprite = 0;
 };

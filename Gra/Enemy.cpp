@@ -34,11 +34,11 @@ void Enemy::ruch(int b_x, int b_y)
 		{
 			if (this->top() > 0) { shape.move(this->ruchW); updateSprite(3); }	
 		}
-		else if (round(this->shape.getPosition().x) > b_x || round(this->shape.getPosition().y) == b_y)
+		else if (round(this->shape.getPosition().x) > b_x )
 		{
 			if (this->left() > 0) { shape.move(this->ruchA); updateSprite(1); }
 		}
-		else if (round(this->shape.getPosition().x) < b_x || round(this->shape.getPosition().y) == b_y)
+		else if (round(this->shape.getPosition().x) < b_x )
 		{
 			if (this->right() < 800) { shape.move(this->ruchD);  updateSprite(2); }
 		}
@@ -80,7 +80,7 @@ void Enemy::ruch(int b_x, int b_y)
 		}
 		else
 		{
-			if (this->shape.getPosition().y >= b_y)
+			if (this->shape.getPosition().y > b_y)
 			{
 				if (this->top() > 0) { shape.move(this->ruchW); updateSprite(3); }
 			}
@@ -88,11 +88,11 @@ void Enemy::ruch(int b_x, int b_y)
 			{
 				if (this->left() > 0) { shape.move(this->ruchA); updateSprite(1); }
 			}
-			if (this->shape.getPosition().y <= b_y)
+			if (this->shape.getPosition().y < b_y)
 			{
 				if (this->bottom() < 600) { shape.move(this->ruchS); updateSprite(4); }
 			}
-			if (this->shape.getPosition().x <= b_x)
+			if (this->shape.getPosition().x < b_x)
 			{
 				if (this->right() < 800) { shape.move(this->ruchD);  updateSprite(2); }
 			}
@@ -161,25 +161,22 @@ void Enemy::setSprite(Vector2i startSprite, Vector2i endSprite, int direction)
 		case 4:
 			tileset = "DATA/TEXTURE/ENEMIES/TYPE_1/pinkyS.png";
 			break;
+		case 5:
+			tileset = "DATA/TEXTURE/ENEMIES/TYPE_1/pinkyDeath.png";
+			break;
 		} 
 		break;
 	case 2: // - imp 
 		switch (direction)
 		{
 		case 0:
-			tileset = "DATA/TEXTURE/ENEMIES/TYPE_2/impN.png";
+			tileset = "DATA/TEXTURE/ENEMIES/TYPE_2/cacoDemon_N.png";
 			break;
 		case 1:
-			tileset = "DATA/TEXTURE/ENEMIES/TYPE_2/impA.png";
+			tileset = "DATA/TEXTURE/ENEMIES/TYPE_2/cacoDemonShoot.png";
 			break;
 		case 2:
-			tileset = "DATA/TEXTURE/ENEMIES/TYPE_2/impD.png";
-			break;
-		case 3:
-			tileset = "DATA/TEXTURE/ENEMIES/TYPE_2/impW.png";
-			break;
-		case 4:
-			tileset = "DATA/TEXTURE/ENEMIES/TYPE_2/impS.png";
+			tileset = "DATA/TEXTURE/ENEMIES/TYPE_2/cacoDemonDeath.png";
 			break;
 		}
 		break;
@@ -201,6 +198,9 @@ void Enemy::setSprite(Vector2i startSprite, Vector2i endSprite, int direction)
 		case 4:
 			tileset = "DATA/TEXTURE/ENEMIES/TYPE_3/SoulS.png";
 			break;
+		case 5:
+			tileset = "DATA/TEXTURE/ENEMIES/TYPE_3/SoulDeath.png";
+			break;
 		}
 		break;
 	}
@@ -211,4 +211,31 @@ void Enemy::setSprite(Vector2i startSprite, Vector2i endSprite, int direction)
 		shape.setTexture(&texture);
 		shape.setTextureRect(IntRect(startSprite.x, startSprite.y, endSprite.x, endSprite.y));
 	}
+}
+
+bool Enemy::getShoot()
+{
+	return isShoot;
+}
+void Enemy::setShoot(bool shoot)
+{
+	isShoot = shoot;
+}
+
+// - metody do zycia przeciwnika
+bool Enemy::getAlive()
+{
+	return isAlive;
+}
+bool Enemy::getDeath()
+{
+	return canDeath;
+}
+void Enemy::setAlive(bool alive)
+{
+	isAlive = alive;
+}
+void Enemy::setDeath(bool death)
+{
+	canDeath = death;
 }

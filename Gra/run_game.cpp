@@ -13,6 +13,8 @@
 using namespace std;
 using namespace sf;
 
+bool START_SHOOT =  false;
+
 template <class T1, class T2> bool Overdrawing(T1& A, T2& B)
 {
     return A.right() >= B.left() && A.left() <= B.right() && A.bottom() >= B.top() && A.top() <= B.bottom();
@@ -52,6 +54,8 @@ vector<Bullet> enemyShot(Bohater bohater, Enemy enemy, vector<Bullet> bulletVec)
             Bullet newBullet(2, 'D');
             newBullet.setPos(Vector2f(enemy.getPosition().x + 15, enemy.getPosition().y));
             bulletVec.push_back(newBullet);
+            START_SHOOT = true;
+            cout << " shooot \n";
             return bulletVec;
         }
         if (enemy.getPosition().x > bohater.getPosition().x)
@@ -59,6 +63,8 @@ vector<Bullet> enemyShot(Bohater bohater, Enemy enemy, vector<Bullet> bulletVec)
             Bullet newBullet(2, 'A');
             newBullet.setPos(Vector2f(enemy.getPosition().x - 15, enemy.getPosition().y));
             bulletVec.push_back(newBullet);
+            START_SHOOT = true;
+            cout << " shooot \n";
             return bulletVec;
         }
     }
@@ -69,6 +75,8 @@ vector<Bullet> enemyShot(Bohater bohater, Enemy enemy, vector<Bullet> bulletVec)
             Bullet newBullet(2, 'S');
             newBullet.setPos(Vector2f(enemy.getPosition().x, enemy.getPosition().y + 15));
             bulletVec.push_back(newBullet);
+            START_SHOOT = true;
+            cout << " shooot \n";
             return bulletVec;
         }
         if (enemy.getPosition().y > bohater.getPosition().y)
@@ -76,6 +84,8 @@ vector<Bullet> enemyShot(Bohater bohater, Enemy enemy, vector<Bullet> bulletVec)
             Bullet newBullet(2, 'W');
             newBullet.setPos(Vector2f(enemy.getPosition().x, enemy.getPosition().y - 15));
             bulletVec.push_back(newBullet);
+            START_SHOOT = true;
+            cout << " shooot \n";
             return bulletVec;
         }
     }
@@ -268,21 +278,31 @@ void runGame()
             {
                 if (Overdrawing(bohater, enemyVec.at(i)))
                     bohater.hp--;
-                if (enemyVec[i].HP <= 0)
-                {
+                if (enemyVec[i].HP <= 0 && !enemyVec[i].getAlive())
+                    enemyVec[i].setAlive(true);
+                if(enemyVec[i].getDeath())
                     enemyVec.erase(enemyVec.begin() + i);
-                }
             }
             if (eTurn)
             {
                 for (int i = 0; i < enemyVec.size(); i++)
                 {
-                    enemyVec[i].ruch(bohater.getPosition().x, bohater.getPosition().y);
+                    if (enemyVec[i].getShoot())
+                        enemyVec[i].updateSprite(5);
+                    else if(enemyVec[i].getAlive())
+                        enemyVec[i].updateSprite(6);
+                    else enemyVec[i].ruch(bohater.getPosition().x, bohater.getPosition().y);
                     for (int j = 0; j < wallVec.size(); j++)
                         if (enemyVec[i].type != 3 && wallVec[j].lava == 0)
                             Collision(wallVec[j], enemyVec[i]);
-                    if (enemyVec[i].type == 2 && enemyVec[i].canShot())
-                        bulletVec = enemyShot(bohater, enemyVec[i], bulletVec);
+                    if(!enemyVec[i].getAlive())
+                        if (enemyVec[i].type == 2 && enemyVec[i].canShot())
+                        {
+                               bulletVec = enemyShot(bohater, enemyVec[i], bulletVec);
+                               if (START_SHOOT) { enemyVec[i].setShoot(true); START_SHOOT = false; }         
+                        }
+
+
                 }
                 eTurn = 0;
             }
