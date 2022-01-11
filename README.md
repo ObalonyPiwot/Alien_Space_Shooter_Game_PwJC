@@ -18,3 +18,4 @@
   - sprite'y smierci przeciwnikow
   - sprite strzalu przeciwnika
   - BUGI ( Gdy umiera przeciwnik i sie w niego wejdzie, dalej mozna umrzec)
+aaaaaa
