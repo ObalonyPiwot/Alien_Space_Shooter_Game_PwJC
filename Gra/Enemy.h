@@ -23,14 +23,19 @@ public:
 	void drawEnemy(RenderWindow& target);
 	int type; //1 wojownik 2 strzelec 3 duch
 	int canShot();
+	void setBoss();
+	void boss_ruch();
+	int boss = 0;
 	// - sprite'y 
 	void updateSprite(int spriteType);
 	void setSprite( Vector2i startSprite, Vector2i endSprite, int direction);
+	
 private:
 	RectangleShape shape;
 	float enemy_rozm = 30.0;
 	float postac_predkosc = 0.55;
 	unsigned int shot = 15;
+	int boss_change_dir = 0;
 
 	//ruch przeciwnika
 	Vector2f ruchW{ 0, -postac_predkosc };

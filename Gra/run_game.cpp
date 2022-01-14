@@ -124,8 +124,8 @@ void runGame()
     text.setCharacterSize(40);
     text.setFillColor(sf::Color::White);
     text.setPosition(335, 270);
-    enemyVec = level1_enemy(enemyVec);
-    wallVec = level1_wall(wallVec);
+    enemyVec = levelboss_enemy(enemyVec);
+    wallVec = levelboss_wall(wallVec);
     // - texturowanie scian
     for (int i = 0; i < wallVec.size(); i++)
         wallVec[i].setTexture();
@@ -133,7 +133,7 @@ void runGame()
     int curLevel = 1;
     bool isFiring = false;
     char direction[1];
-    int shot = 0;
+    int shot = 0, bossShotDelay = 200, bossShotsCounter = 0;
     int pauza = 0, pauseTime = 10;
     bohater.predkosci(15);
     // - czas wroga
@@ -146,6 +146,10 @@ void runGame()
     {
         if (pauseTime)
             pauseTime--;
+        if (shot > 0)
+            shot--;
+        if (bossShotDelay)
+            bossShotDelay--;
         window.clear();
         window.draw(map);
         while (window.pollEvent(event))
@@ -183,8 +187,8 @@ void runGame()
                     bohater.hp = 5;
                     if (curLevel == 1)
                     {
-                        enemyVec = level1_enemy(enemyVec);
-                        wallVec = level1_wall(wallVec);
+                        enemyVec = levelboss_enemy(enemyVec);
+                        wallVec = levelboss_wall(wallVec);
                         bohater.setPosition(15, 300);
                     }
                     if (curLevel == 2)
@@ -277,7 +281,27 @@ void runGame()
             {
                 for (int i = 0; i < enemyVec.size(); i++)
                 {
-                    enemyVec[i].ruch(bohater.getPosition().x, bohater.getPosition().y);
+                    if (enemyVec[i].boss)
+                    {
+                        enemyVec[i].boss_ruch();
+                        if (!bossShotDelay)
+                        {
+                            if (enemyVec[i].canShot())
+                            {
+                            Bullet newBullet(2, 'S');
+                                newBullet.setPos(Vector2f(enemyVec[i].getPosition().x, enemyVec[i].getPosition().y +25));
+                                bulletVec.push_back(newBullet);
+                                bossShotsCounter++;
+                            }
+                            if (bossShotsCounter == 10)
+                            {
+                                bossShotsCounter = 0;
+                                bossShotDelay = 400;
+                            }
+                        }
+                    }
+                    else
+                        enemyVec[i].ruch(bohater.getPosition().x, bohater.getPosition().y);
                     for (int j = 0; j < wallVec.size(); j++)
                         if (enemyVec[i].type != 3 && wallVec[j].lava == 0)
                             Collision(wallVec[j], enemyVec[i]);
@@ -298,8 +322,6 @@ void runGame()
                 bohater.play_Shoot();
 
             }
-            if (shot > 0)
-                shot--;
             for (int i = 0; i < (int)bulletVec.size(); i++) {
                 for (int j = 0; j < bohater.shotspeed; j++)
                 {

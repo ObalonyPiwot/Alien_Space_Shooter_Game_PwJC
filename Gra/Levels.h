@@ -276,3 +276,31 @@ vector<Sciany> level6_wall(vector<Sciany> wallVec)
     }
     return wallVec;
 }
+
+vector<Enemy> levelboss_enemy(vector<Enemy> enemyVec)
+{
+    Enemy newEnemy(100, 50, 8, 2);
+    newEnemy.setBoss();
+    enemyVec.push_back(newEnemy);
+    return enemyVec;
+}
+
+vector<Sciany> levelboss_wall(vector<Sciany> wallVec)
+{
+    Sciany newWall(400, 200, 800, 100, 2, 1);
+    wallVec.push_back(newWall);
+    for (int i = 0; i < 3; i++)
+    {
+        Sciany newWall(100 + 300 * i, 300, 50, 30, 2, 0);
+        wallVec.push_back(newWall);
+        Sciany newWall2(100 + 300 * i, 500, 50, 30, 2, 0);
+        wallVec.push_back(newWall2);
+    }
+    for (int i = 0; i < 2; i++)
+    {
+        Sciany newWall(250 + 300 * i, 400, 50, 30, 2, 0);
+        wallVec.push_back(newWall);
+        
+    }
+    return wallVec;
+}

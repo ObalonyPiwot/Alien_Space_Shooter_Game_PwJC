@@ -132,6 +132,14 @@ void Enemy::setType(int a)
 	type = a;
 }
 
+void Enemy::setBoss()
+{
+	boss = 1;
+	HP = 30;
+	shape.setSize(Vector2f(50, 50));
+	postac_predkosc = 50;
+}
+
 Vector2f Enemy::getPosition()
 {
 	return shape.getPosition();
@@ -199,4 +207,23 @@ void Enemy::setSprite(Vector2i startSprite, Vector2i endSprite, int direction)
 		shape.setTexture(&texture);
 		shape.setTextureRect(IntRect(startSprite.x, startSprite.y, endSprite.x, endSprite.y));
 	}
+}
+
+void Enemy::boss_ruch()
+{
+	if (!boss_change_dir)
+	{
+		shape.move(this->ruchA);
+		/*updateSprite(1); */ 
+		if (this->left() < 0)
+			boss_change_dir = 1;
+	}
+	else
+	{
+		shape.move(this->ruchD);
+		/*updateSprite(1); */
+		if (this->right() > 790)
+			boss_change_dir = 0;
+	}
+
 }
